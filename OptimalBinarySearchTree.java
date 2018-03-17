@@ -10,6 +10,7 @@ class OptimalBinarySearchTree
 		private int costMatrix[][];//triangular matrix 
 		private int cumulativeFrequency[];
 		private int size;
+		private boolean costEvaluated;
 		
 		public OptimalBinarySearchTree(int cumulativeFrequency[])
 			{
@@ -38,10 +39,16 @@ class OptimalBinarySearchTree
 				return cumulativeFrequency[j];
 			else
 				return cumulativeFrequency[j]-cumulativeFrequency[i-1];
-		}
-		public int getOptimalCost()
+		}public int getOptimalCost()
 		{
+			costEvaluated=true;
 			return optimalCost(0,size-1);
+		}
+		public int[][] getCostMatrix()
+		{
+			if(!costEvaluated)
+				optimalCost(0, size-1);
+			return costMatrix;
 		}
 		private int optimalCost(int i, int j)
 			{
